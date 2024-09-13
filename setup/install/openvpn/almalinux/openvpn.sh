@@ -14,17 +14,18 @@ check_os() {
 		os_version=$(grep -shoE '[0-9]+' /etc/almalinux-release /etc/rocky-release /etc/centos-release | head -1)
 		group_name="nobody"
   else
-		exiterr "This installer seems to be running on an unsupported distribution.
-Supported distros are Ubuntu"
+		exiterr "This installer seems to be running on an unsupported distribution.Supported distros are Ubuntu"
 	fi
 }
+
 check_os_ver() {
   if [[ "$os" == "centos" && "$os_version" -lt 8 ]]; then
 		if ! grep -qs "Amazon Linux release 2 " /etc/system-release; then
-			exiterr "CentOS 8 or higher is required to use this installer.
-This version of CentOS is too old and unsupported."
+			exiterr "CentOS 8 or higher is required to use this installer.This version of CentOS is too old and unsupported."
 		fi
+  fi
  }
+ 
  install_pkgs() {
  if [[ "$os" = "centos" ]]; then
 		if grep -qs "Amazon Linux release 2 " /etc/system-release; then
