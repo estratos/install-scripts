@@ -50,9 +50,9 @@ install_pkgs() {
 		fi
 		(
 			set -x
-			yum -y -q install openvpn openssl ca-certificates tar $firewall >/dev/null 2>&1
+			yum -y install openvpn openssl ca-certificates tar $firewall >/dev/null 2>&1
 		) || exiterr3
-
+fi
  }
  
 check_os
