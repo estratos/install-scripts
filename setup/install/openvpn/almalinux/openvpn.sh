@@ -18,7 +18,8 @@ check_os() {
 	fi
 }
 
-if [[ "$os" == "ubuntu" && "$os_version" -lt 2004 ]]; then
+check_os_ver() {
+	if [[ "$os" == "ubuntu" && "$os_version" -lt 2004 ]]; then
 		exiterr "Ubuntu 20.04 or higher is required to use this installer.
 This version of Ubuntu is too old and unsupported."
 	fi
@@ -32,8 +33,9 @@ This version of Debian is too old and unsupported."
 This version of CentOS is too old and unsupported."
 		fi
 	fi
- }
- install_pkgs() {
+}
+
+install_pkgs() {
  if [[ "$os" = "centos" ]]; then
 		if grep -qs "Amazon Linux release 2 " /etc/system-release; then
 			(
