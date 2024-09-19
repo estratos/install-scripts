@@ -1,11 +1,8 @@
 #!/bin/bash
-
-
 exiterr()  { echo "Error: $1" >&2; exit 1; }
 exiterr2() { exiterr "'apt-get install' fallo."; }
 exiterr3() { exiterr "'yum install' fallo."; }
 exiterr4() { exiterr "'zypper install' fallo."; }
-
 check_os() {
 	if grep -qs "ubuntu" /etc/os-release; then
 		os="ubuntu"
@@ -26,7 +23,9 @@ insta_ubuntu_2004() {
         if [[ "$os" == "ubuntu" && "$os_version" == 2004 ]]; then
         wget -qO - https://as-repository.openvpn.net/as-repo-public.gpg | apt-key add -
         echo "deb http://as-repository.openvpn.net/as/debian focal main">/etc/apt/sources.list.d/openvpn-as-repo.list
-
+        
+	else
+                exiterr "this line sets 22.04 repos."
         fi
 
 }
