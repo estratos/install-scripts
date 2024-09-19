@@ -22,6 +22,14 @@ check_os_ver() {
 This version of Ubuntu is too old and unsupported."
 	fi
  }
+insta_ubuntu_2004() { 
+        if [[ "$os" == "ubuntu" && "$os_version" == 2004 ]]; then
+        wget -qO - https://as-repository.openvpn.net/as-repo-public.gpg | apt-key add -
+        echo "deb http://as-repository.openvpn.net/as/debian focal main">/etc/apt/sources.list.d/openvpn-as-repo.list
+
+        fi
+
+}
  
 check_os
 check_os_ver
@@ -29,7 +37,6 @@ check_os_ver
 apt -y update
 apt -y upgrade
 apt -y install ca-certificates wget net-tools gnupg
-wget -qO - https://as-repository.openvpn.net/as-repo-public.gpg | apt-key add -
-echo "deb http://as-repository.openvpn.net/as/debian focal main">/etc/apt/sources.list.d/openvpn-as-repo.list
+insta_ubuntu_2004
 apt -y update
 apt -y install openvpn-as
