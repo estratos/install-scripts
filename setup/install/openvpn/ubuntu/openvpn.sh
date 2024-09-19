@@ -53,5 +53,5 @@ check_os_ver
 apt -y update
 apt -y upgrade
 apt -y install ca-certificates wget net-tools gnupg
-insta_ubuntu_2004
+insta_ubuntu_2004_2204
 
