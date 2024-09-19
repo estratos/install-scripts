@@ -36,6 +36,8 @@ insta_ubuntu_2004_2204() {
       
         
 	else
+         mkdir -p /etc/apt/keyrings # directory does not exist on older releases
+         curl -fsSL https://swupdate.openvpn.net/repos/repo-public.gpg | gpg --dearmor > /etc/apt/keyrings/openvpn-repo-public.gpg
         # Always get the latest package for 22.04, even Beta versions
         echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] http://build.openvpn.net/debian/openvpn/testing jammy main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
         apt-get update && apt-get install openvpn
