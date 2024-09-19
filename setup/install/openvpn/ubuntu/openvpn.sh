@@ -18,11 +18,11 @@ Supported distros are Ubuntu 20.04 & 22.04"
 }
 check_os_ver() {
 	if [[ "$os" == "ubuntu" && "$os_version" -lt 2004 ]]; then
-		exiterr "Ubuntu 20.04 or higher is required to use this installer.
-This version of Ubuntu is too old and unsupported."
+		exiterr "Ubuntu 20.04 or higher is required to use this installer.This version of Ubuntu is too old and unsupported."
          else
+	 if [[ "$os" == "ubuntu" && "$os_version" == "2404" ]]; then
 	 exiterr "Ubuntu 24.04 is not yet supported."
-	 
+	 fi
 	 
 	 
 	fi
