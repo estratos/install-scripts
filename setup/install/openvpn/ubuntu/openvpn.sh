@@ -13,22 +13,34 @@ check_os() {
                 pause
   else
 		exiterr "This installer seems to be running on an unsupported distribution.
-Supported distros are Ubuntu"
+Supported distros are Ubuntu 20.04 & 22.04"
 	fi
 }
 check_os_ver() {
 	if [[ "$os" == "ubuntu" && "$os_version" -lt 2004 ]]; then
 		exiterr "Ubuntu 20.04 or higher is required to use this installer.
 This version of Ubuntu is too old and unsupported."
+         else
+	 exiterr "Ubuntu 24.04 is not yet supported."
+	 
+	 
+	 
 	fi
  }
-insta_ubuntu_2004() { 
+insta_ubuntu_2004_2204() { 
         if [[ "$os" == "ubuntu" && "$os_version" == "2004" ]]; then
         wget -qO - https://as-repository.openvpn.net/as-repo-public.gpg | apt-key add -
         echo "deb http://as-repository.openvpn.net/as/debian focal main">/etc/apt/sources.list.d/openvpn-as-repo.list
+        apt -y update
+        apt -y install openvpn-as
+      
         
 	else
-                exiterr "this line sets 22.04 repos."
+        # Always get the latest package for 22.04, even Beta versions
+        echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/openvpn-repo-public.gpg] http://build.openvpn.net/debian/openvpn/testing jammy main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
+        apt-get update && apt-get install openvpn
+	apt-get install openvpn-dco-dkms
+                
         fi
 
 }
@@ -40,5 +52,4 @@ apt -y update
 apt -y upgrade
 apt -y install ca-certificates wget net-tools gnupg
 insta_ubuntu_2004
-apt -y update
-apt -y install openvpn-as
+
