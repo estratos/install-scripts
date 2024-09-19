@@ -10,7 +10,7 @@ check_os() {
 		group_name="nogroup"
                 echo "Release: " 
 		echo $os_version
-                pause
+                
   else
 		exiterr "This installer seems to be running on an unsupported distribution.
 Supported distros are Ubuntu 20.04 & 22.04"
